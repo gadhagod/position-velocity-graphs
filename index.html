@@ -1,0 +1,44 @@
+<link rel="stylesheet" href="styles.css">
+
+<h2 align="center">Position VS Time to Velocity VS Time</h1>
+
+<div class="right">
+    <p>
+        <u><b>How it works</b></u> <br>
+        Every time a new measurement is added (excluding the first), this program
+        uses the following equation to determine two points to plot on the v vs t
+        graph. <br><br>
+        <img src="img/equation.png" length="40%" width="40%">
+        <br><br>
+        Source code can be found <a href="https://github.com/gadhagod/position-velocity-graphs">here</a>.
+    </p>
+
+
+    <center>
+        <input type="text" id="input_time" placeholder="time">
+        <input type="text" id="input_position" placeholder="position">
+        <button id="add">Add data</button>
+        <br><br>
+        <table id="dtTable">
+            <tr>
+                <th>Time</th>
+                <th>Position</th>
+            <tr>
+        </table>
+    </center>
+</div>
+
+<div class="left">
+    <center>
+        <div class="graph-container">
+            <canvas id="dtChart" width="10px" height="10px"></canvas>
+        </div>
+        <hr>
+        <div class="graph-container">
+            <canvas id="vtChart" width="10px" height="10px"></canvas>
+        </div>
+    </center>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="index.js"></script>
