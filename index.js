@@ -83,7 +83,14 @@ var addData = (x, y) => {
         return;
     }
 
-    let y1 = (thisPoint.y - lastPoint.y) / (thisPoint.x - lastPoint.y);
+    let y1 = (thisPoint.y - lastPoint.y) / (thisPoint.x - lastPoint.y); // sometimes is nan
+    if(y1 === NaN) {
+        console.log("nan!")
+        y1 = 0;
+    }
+    if (y1 === Infinity) {
+        y1 = lastPoint.y;
+    }
     let x1 = thisPoint.x;
 
     let y2 = y1;
@@ -96,9 +103,7 @@ var addData = (x, y) => {
     vtGraph.update();
 };
 
+console.log(addButton)
 addButton.addEventListener("click", () => addData(addTimeInput.value, addPositionInput.value))
 addPositionInput.addEventListener("keyup", onKeyUp);
 addTimeInput.addEventListener("keyup", onKeyUp); 
-setTimeUnitButton.addEventListener("click", () => {
-    dtGraph.update();
-})
