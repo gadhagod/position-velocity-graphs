@@ -56,7 +56,7 @@ const graphConfig = {
 
 var dtGraphConfig = JSON.parse(JSON.stringify(graphConfig));
 dtGraphConfig.options.plugins.title.text = "Position VS Time";
-dtGraphConfig.data.datasets[0].label = "Velocity";
+dtGraphConfig.data.datasets[0].label = "Position";
 dtGraphConfig.options.scales.yAxes.text = "d";
 console.log(dtGraphConfig.options.scales)
 var dtGraph = new Chart(document.getElementById("dtChart"), dtGraphConfig);
@@ -64,7 +64,7 @@ var dtGraph = new Chart(document.getElementById("dtChart"), dtGraphConfig);
 var vtGraphConfig = JSON.parse(JSON.stringify(graphConfig));
 vtGraphConfig.options.plugins.title.text = "Velocity VS Time";
 vtGraphConfig.data.datasets.data = {x:0, y:0};
-vtGraphConfig.data.datasets[0].label = "Acceleration";
+vtGraphConfig.data.datasets[0].label = "Velocity";
 dtGraphConfig.options.scales.yAxes.text = "v";
 var vtGraph = new Chart(document.getElementById("vtChart"), vtGraphConfig);
 
