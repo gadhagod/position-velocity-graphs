@@ -50,7 +50,6 @@ var dtGraphConfig = JSON.parse(JSON.stringify(graphConfig));
 dtGraphConfig.options.plugins.title.text = "Position VS Time";
 dtGraphConfig.data.datasets[0].label = "Position";
 dtGraphConfig.options.scales.yAxes.text = "d";
-console.log(dtGraphConfig.options.scales)
 var dtGraph = new Chart(document.getElementById("dtChart"), dtGraphConfig);
 
 var vtGraphConfig = JSON.parse(JSON.stringify(graphConfig));
@@ -85,7 +84,6 @@ var addData = (x, y) => {
 
     let y1 = (thisPoint.y - lastPoint.y) / (thisPoint.x - lastPoint.y); // sometimes is nan
     if(y1 === NaN) {
-        console.log("nan!")
         y1 = 0;
     }
     if (y1 === Infinity) {
@@ -103,7 +101,6 @@ var addData = (x, y) => {
     vtGraph.update();
 };
 
-console.log(addButton)
 addButton.addEventListener("click", () => addData(addTimeInput.value, addPositionInput.value))
 addPositionInput.addEventListener("keyup", onKeyUp);
 addTimeInput.addEventListener("keyup", onKeyUp); 
