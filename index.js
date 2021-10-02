@@ -35,15 +35,7 @@ const graphConfig = {
             xAxes: {
                 display: true,
                 id: "x",
-                type: "linear",
-                label: {
-                    text: "Hi",
-                    display: true
-                },
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Value'
-                }
+                type: "linear"
             }
         },
         plugins: {
@@ -91,7 +83,7 @@ var addData = (x, y) => {
         return;
     }
 
-    let y1 = (thisPoint.y - lastPoint.y) / (thisPoint.x - lastPoint.y); // TODO: make sure (thisPoint.x - lastPoint.y) is not 0
+    let y1 = (thisPoint.y - lastPoint.y) / (thisPoint.x - lastPoint.y);
     let x1 = thisPoint.x;
 
     let y2 = y1;
@@ -108,7 +100,5 @@ addButton.addEventListener("click", () => addData(addTimeInput.value, addPositio
 addPositionInput.addEventListener("keyup", onKeyUp);
 addTimeInput.addEventListener("keyup", onKeyUp); 
 setTimeUnitButton.addEventListener("click", () => {
-    dtGraph.options.scales.xAxes.title.text = "Hi";
-    dtGraph.options.scales.xAxes.title.display = true;
     dtGraph.update();
 })
