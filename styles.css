@@ -15,10 +15,11 @@ body{
     padding-top: 20px;
 }
 .right {
-    top: 15;
+    top: 40;
     left: 20
 }
 .left {
+    top: 25;
     right: 90;
 }
 table, td {
