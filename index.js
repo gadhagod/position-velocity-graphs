@@ -82,11 +82,14 @@ var addData = (x, y) => {
         return;
     }
 
-    let y1 = (thisPoint.y - lastPoint.y) / (thisPoint.x - lastPoint.y); // sometimes is nan
-    if(y1 === NaN) {
+    let y1 = (thisPoint.y - lastPoint.y) / (thisPoint.x - lastPoint.x); // sometimes is nan
+    if(thisPoint.y)
+    if(isNaN(y1)) {
+        console.log("nan")
         y1 = 0;
     }
     if (y1 === Infinity) {
+        console.log("infinity")
         y1 = lastPoint.y;
     }
     let x1 = thisPoint.x;
@@ -94,7 +97,7 @@ var addData = (x, y) => {
     let y2 = y1;
     let x2 = lastPoint.x;
 
-    console.log(`(${x2}, ${y2}) (${x1}, ${y1})`)
+    //console.log(`(${x2}, ${y2}) (${x1}, ${y1})`)
 
     vtGraph.data.datasets[0].data.push({x: x2, y: y2});
     vtGraph.data.datasets[0].data.push({x: x1, y: y1});
