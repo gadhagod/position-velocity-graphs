@@ -17,6 +17,8 @@ const graphConfig = {
     showLine: true,
     data: {
         datasets: [{
+            borderColor: "rgba(0, 0, 0, 0.5)",
+            pointBackgroundColor: "rgba(0, 0, 0, 0.5)",
             data: [],
         }]
     },
@@ -24,23 +26,32 @@ const graphConfig = {
         responsive: true,
         maintainAspectRatio: false,
         scales: {
-            yAxes: [{
-                id: "y",
+            yAxes: {
                 ticks: {
-                    beginAtZero: true,
+                    beginAtZero: true
                 },
                 type: "linear",
-                display: true
-            }],
+                grid: {
+                    borderColor: "rgba(0, 0, 0, 1)",
+                },
+                ticks: {
+                    color: "black"
+                }
+            },
             xAxes: {
-                display: true,
-                id: "x",
-                type: "linear"
+                type: "linear",
+                grid: {
+                    borderColor: "rgba(0, 0, 0, 1)",
+                },
+                ticks: {
+                    color: "black"
+                }
             }
         },
         plugins: {
             title: {
-                display: true
+                display: true,
+                color: "rgba(0, 0, 0, 1)"
             }
         }
     }
