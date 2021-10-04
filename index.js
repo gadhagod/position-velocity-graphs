@@ -141,3 +141,14 @@ addButton.addEventListener("click", () => {
 })
 addPositionInput.addEventListener("keyup", onKeyUp);
 addTimeInput.addEventListener("keyup", onKeyUp); 
+document.getElementById("reset").addEventListener("click", () => {
+    dtGraph.data.datasets[0].data = [];
+    vtGraph.data.datasets[0].data = [];
+    dtTable.innerHTML = `<tr>
+    <th>Time</th>
+    <th>Position</th>
+<tr>`;
+
+    dtGraph.update();
+    vtGraph.update();
+})
