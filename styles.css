@@ -15,11 +15,11 @@ body{
     padding-top: 20px;
 }
 .right {
-    top: 40;
+    top: 60;
     left: 20
 }
 .left {
-    top: 25;
+    top: 55;
     right: 90;
 }
 p {
