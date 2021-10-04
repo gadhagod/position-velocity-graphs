@@ -114,7 +114,7 @@ const addData = (x, y) => {
     vtGraph.update();
 };
 
-const updateDisplacement = (tf, df) => {
+const updateTotals = (tf, df) => {
     // get displacement
     if (vtGraph.data.datasets[0].data.length < 1) {
         return;
@@ -123,14 +123,21 @@ const updateDisplacement = (tf, df) => {
     let ti = dtGraph.data.datasets[0].data[0].x;
     let displacement = df - di;
     let velocity = displacement / (tf  - ti);
-    document.getElementById("totals").innerText = `Displacement: ${displacement}; Velocity: ${velocity}`;
+
+    let distance = 0;
+    for(let i = 1; i < dtGraph.data.datasets[0].data.length; i++) {
+        let lastD = dtGraph.data.datasets[0].data[i - 1].y;
+        let thisD = dtGraph.data.datasets[0].data[i].y;
+        distance += (thisD - lastD) * ((thisD - lastD) < 0 ? -1 : 1);
+    }
+    document.getElementById("totals").innerText = `Displacement: ${displacement}; Distance: ${distance} Velocity: ${velocity}`;
 
     return displacement;
 }
 
 addButton.addEventListener("click", () => {
     addData(addTimeInput.value, addPositionInput.value);
-    updateDisplacement(addTimeInput.value, addPositionInput.value);
+    updateTotals(addTimeInput.value, addPositionInput.value);
 })
 addPositionInput.addEventListener("keyup", onKeyUp);
 addTimeInput.addEventListener("keyup", onKeyUp); 
