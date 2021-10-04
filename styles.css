@@ -22,6 +22,9 @@ body{
     top: 25;
     right: 90;
 }
+p {
+    display: inline;
+}
 table, td {
     border: 1px solid black;
 }

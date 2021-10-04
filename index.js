@@ -70,7 +70,7 @@ vtGraphConfig.data.datasets[0].label = "Velocity";
 dtGraphConfig.options.scales.yAxes.text = "v";
 var vtGraph = new Chart(document.getElementById("vtChart"), vtGraphConfig);
 
-var addData = (x, y) => {
+const addData = (x, y) => {
     if(!x || !y) {
         return;
     }
@@ -94,7 +94,6 @@ var addData = (x, y) => {
     }
 
     let y1 = (thisPoint.y - lastPoint.y) / (thisPoint.x - lastPoint.x); // sometimes is nan
-    if(thisPoint.y)
     if(isNaN(y1)) {
         console.log("nan")
         y1 = 0;
@@ -115,6 +114,23 @@ var addData = (x, y) => {
     vtGraph.update();
 };
 
-addButton.addEventListener("click", () => addData(addTimeInput.value, addPositionInput.value))
+const updateDisplacement = (tf, df) => {
+    // get displacement
+    if (vtGraph.data.datasets[0].data.length < 1) {
+        return;
+    } 
+    let di = dtGraph.data.datasets[0].data[0].y;
+    let ti = dtGraph.data.datasets[0].data[0].x;
+    let displacement = df - di;
+    let velocity = displacement / (tf  - ti);
+    document.getElementById("totals").innerText = `Displacement: ${displacement}; Velocity: ${velocity}`;
+
+    return displacement;
+}
+
+addButton.addEventListener("click", () => {
+    addData(addTimeInput.value, addPositionInput.value);
+    updateDisplacement(addTimeInput.value, addPositionInput.value);
+})
 addPositionInput.addEventListener("keyup", onKeyUp);
 addTimeInput.addEventListener("keyup", onKeyUp); 
