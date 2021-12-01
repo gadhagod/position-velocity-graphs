@@ -95,11 +95,9 @@ const addData = (x, y) => {
 
     let y1 = (thisPoint.y - lastPoint.y) / (thisPoint.x - lastPoint.x); // sometimes is nan
     if(isNaN(y1)) {
-        console.log("nan")
         y1 = 0;
     }
     if (y1 === Infinity) {
-        console.log("infinity")
         y1 = lastPoint.y;
     }
     let x1 = thisPoint.x;
@@ -115,24 +113,31 @@ const addData = (x, y) => {
 };
 
 const updateTotals = (tf, df) => {
-    // get displacement
-    if (vtGraph.data.datasets[0].data.length < 1) {
+    console.log(dtGraph.data.datasets[0].data.length)
+    if (dtGraph.data.datasets[0].data.length === 1) {
+        document.getElementById("totals").innerText = `Displacement: 0; Distance: 0; Velocity: 0`;
         return;
-    } 
+    }
+    if (vtGraph.data.datasets[0].data.length < 1) {
+        document.getElementById("totals").innerText = `Displacement:— Distance:— Velocity:—`;
+        return;
+    }
     let di = dtGraph.data.datasets[0].data[0].y;
     let ti = dtGraph.data.datasets[0].data[0].x;
-    let displacement = df - di;
-    let velocity = displacement / (tf  - ti);
+    if(di && ti) {
+        let displacement = df - di;
+        let velocity = displacement / (tf  - ti);
 
-    let distance = 0;
-    for(let i = 1; i < dtGraph.data.datasets[0].data.length; i++) {
-        let lastD = dtGraph.data.datasets[0].data[i - 1].y;
-        let thisD = dtGraph.data.datasets[0].data[i].y;
-        distance += (thisD - lastD) * ((thisD - lastD) < 0 ? -1 : 1);
+        let distance = 0;
+        for(let i = 1; i < dtGraph.data.datasets[0].data.length; i++) {
+            let lastD = dtGraph.data.datasets[0].data[i - 1].y;
+            let thisD = dtGraph.data.datasets[0].data[i].y;
+            distance += (thisD - lastD) * ((thisD - lastD) < 0 ? -1 : 1);
+        }
+        document.getElementById("totals").innerText = `Displacement: ${displacement}; Distance: ${distance}; Velocity: ${velocity}`;
+
+        return displacement;
     }
-    document.getElementById("totals").innerText = `Displacement: ${displacement}; Distance: ${distance} Velocity: ${velocity}`;
-
-    return displacement;
 }
 
 addButton.addEventListener("click", () => {
@@ -151,4 +156,5 @@ document.getElementById("reset").addEventListener("click", () => {
 
     dtGraph.update();
     vtGraph.update();
+    updateTotals();
 })
